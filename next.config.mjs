@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    experimental: {
+        typedRoutes: false,
+    },
+}
 
-export default nextConfig;
+export default nextConfig
