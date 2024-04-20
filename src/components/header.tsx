@@ -4,15 +4,15 @@ import { ModeToggle } from './mode-toggle';
 const menu = [
     {
         name: 'Blog',
-        href: '/blog',
+        href: '#blog',
     },
     {
         name: 'About',
-        href: '/about',
+        href: '#about',
     },
     {
         name: 'Contact',
-        href: '/contact',
+        href: '#contact',
     },
 ];
 
