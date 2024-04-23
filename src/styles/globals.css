@@ -4,7 +4,7 @@
 
 @layer base {
     :root {
-        --background: 0 0% 100%;
+        --background: 0 2% 98%;
         --foreground: 222.2 84% 4.9%;
 
         --card: 0 0% 100%;
@@ -64,15 +64,16 @@
         --input: 217.2 32.6% 17.5%;
         --ring: 212.7 26.8% 83.9%;
     }
-}
 
-@layer base {
+
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-background text-foreground;
     }
+
     @keyframes jumbo {
         0% {
             background-position: 50% 50%, 50% 50%;
@@ -136,4 +137,9 @@
     .dark .jumbo::after {
         background-image: var(--stripesDark), var(--rainbow);
     }
+}
+
+img {
+    overflow-clip-margin: unset;
+    object-position: center;
 }
