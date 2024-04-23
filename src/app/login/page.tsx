@@ -44,7 +44,7 @@ export default function Login() {
                                 </div>
                                 <div className="flex flex-col space-y-1.5">
                                     <Label className="text-white" htmlFor="password">Password</Label>
-                                    <Input className="bg-transparent text-slate-200 focus-visible:ring-slate-800 focus-visible:outline-none" id="password" placeholder="Password"/>
+                                    <Input type="password" className="bg-transparent text-slate-200 focus-visible:ring-slate-800 focus-visible:outline-none" id="password" placeholder="Password"/>
                                 </div>
                             </div>
                         </form>

@@ -14,6 +14,10 @@ const menu = [
         name: 'Contact',
         href: '#contact',
     },
+    {
+        name: 'My Projects',
+        href: '#projects',
+    },
 ];
 
 

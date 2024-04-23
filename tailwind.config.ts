@@ -90,7 +90,10 @@ const config = {
             }
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [
+        require("tailwindcss-animate"),
+        require("@tailwindcss/forms")
+    ],
 } satisfies Config
 
 export default config
