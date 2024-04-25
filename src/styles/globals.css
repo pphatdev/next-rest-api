@@ -33,6 +33,10 @@
         --ring: 222.2 84% 4.9%;
 
         --radius: 0.5rem;
+
+        --radial-gradient-background: var(--background);
+        --solid-color-background: 15, 15, 15;
+        --overlay-color: 255, 255, 255;
     }
 
     .dark {
@@ -68,10 +72,6 @@
 
     * {
         @apply border-border;
-    }
-
-    body {
-        @apply bg-background text-foreground;
     }
 
     @keyframes jumbo {
@@ -142,4 +142,90 @@
 img {
     overflow-clip-margin: unset;
     object-position: center;
+}
+
+.radial-gradient {
+    background: radial-gradient(
+            circle at 50% 0%,
+            rgba(var(--radial-gradient-background), 0.05) 0%,
+            transparent 60%
+        )
+        rgb(3, 3, 3);
+}
+
+.linear-mask {
+    mask-image: linear-gradient(
+        -75deg,
+        #040211 calc(var(--x) + 20%),
+        transparent calc(var(--x) + 30%),
+        #040211 calc(var(--x) + 100%)
+    );
+    -webkit-mask-image: linear-gradient(
+        -75deg,
+        #040211 calc(var(--x) + 20%),
+        transparent calc(var(--x) + 30%),
+        #040211 calc(var(--x) + 100%)
+    );
+}
+
+.linear-overlay {
+    background-image: linear-gradient(
+        -75deg,
+        rgba(0, 99, 38, 0.1) calc(var(--x) + 20%),
+        rgba(0, 99, 38, 0.5) calc(var(--x) + 25%),
+        rgba(0, 99, 38, 0.1) calc(var(--x) + 100%)
+    );
+    mask:
+        linear-gradient(black, black) content-box,
+        linear-gradient(black, black);
+    -webkit-mask:
+        linear-gradient(black, black) content-box,
+        linear-gradient(black, black);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+}
+
+:is(.dark) {
+
+    .radial-gradient {
+        background: radial-gradient(
+                circle at 50% 0%,
+                rgba(var(--radial-gradient-background), 0.05) 0%,
+                transparent 60%
+            )
+            rgb(22, 18, 18);
+    }
+
+    .linear-mask {
+        mask-image: linear-gradient(
+            -75deg,
+            #ffffff calc(var(--x) + 20%),
+            transparent calc(var(--x) + 30%),
+            #ffffff calc(var(--x) + 100%)
+        );
+        -webkit-mask-image: linear-gradient(
+            -75deg,
+            #ffffff calc(var(--x) + 20%),
+            transparent calc(var(--x) + 30%),
+            #ffffff calc(var(--x) + 100%)
+        );
+
+    }
+
+    .linear-overlay {
+        background-image: linear-gradient(
+            -75deg,
+            rgba(0, 99, 38, 0.3) calc(var(--x) + 20%),
+            rgba(0, 99, 38, 0.6) calc(var(--x) + 25%),
+            rgba(0, 99, 38, 0.3) calc(var(--x) + 100%)
+        );
+        mask:
+            linear-gradient(black, black) content-box,
+            linear-gradient(black, black);
+        -webkit-mask:
+            linear-gradient(black, black) content-box,
+            linear-gradient(black, black);
+        mask-composite: exclude;
+        -webkit-mask-composite: xor;
+    }
 }

@@ -19,13 +19,10 @@ import {
 
 import logo from '../../assets/logo.svg'
 import { usePathname } from 'next/navigation'
-import { classNames } from '@/utils/className';
+import { classNames } from '@/utils/class-name';
+import { ModeToggle } from '../mode-toggle';
 
-export default function AdminSidebar({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>){
+export default function AdminSidebar(){
 
     const pathname = usePathname()
     const modules = [
@@ -42,14 +39,15 @@ export default function AdminSidebar({
             name: 'Projects',
             href: '/',
             children: [
-                { id: 1, name: 'Projects', href: '/admin/projects', initial: 'P', icon: null, new: 1, current: false },
+                { id: 1, name: 'Users', href: '/admin/users', initial: 'P', icon: null, new: 0, current: false },
+                { id: 2, name: 'Projects', href: '/admin/projects', initial: 'P', icon: null, new: 0, current: false },
             ]
         }
     ]
 
-    // const [sidebarCollapsed, setSidebarCollapsed] = useLocalStorage('sidebarCollapsed', false)
-    const [sidebarOpen, setSidebarOpen]         = useState(false)
-    const [collapsed, setCollapsed]             = useState(false)
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [collapsed, setCollapsed] = useState(false)
+
 
     return (
         <>
@@ -168,10 +166,10 @@ export default function AdminSidebar({
             {/* Static sidebar for desktop */}
             <div className={classNames(
                 collapsed ? 'lg:w-0' : 'lg:w-72',
-                "hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col transition-all"
+                "hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col transition-all"
             )}>
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-0 overflow-y-auto border-r border-gray-200 bg-white">
+                <div className="flex grow flex-col gap-y-0 overflow-y-auto border-r border-gray-200 dark:border-white/10 dark:bg-background">
                     <div className="flex items-center justify-between h-20 shrink-0 border-b px-2">
                         <div className='flex items-center justify-start'>
                             <img
@@ -179,7 +177,7 @@ export default function AdminSidebar({
                                 src={logo.src}
                                 alt="Your Company"
                             />
-                            <span className='text-2xl font-normal text-black/70'>Beta</span>
+                            <span className='text-2xl font-normal text-foreground'>Beta</span>
                         </div>
 
                         <button type="button" className="m-2.5 p-2.5 text-gray-700" onClick={() => setCollapsed(true) }>
@@ -210,15 +208,15 @@ export default function AdminSidebar({
                                                                 href={item.href}
                                                                 className={classNames(
                                                                     item.current
-                                                                        ? 'bg-gray-50 text-primary-600'
-                                                                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50',
+                                                                        ? 'bg-gray-50 text-primary-600 dark:bg-primary/10'
+                                                                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50 dark:hover:bg-primary/10 dark:text-slate-300',
                                                                     'group flex items-center relative gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                                 )}
                                                             >
                                                                 {item?.icon
                                                                     ? <item.icon
                                                                         className={classNames(
-                                                                            item.current ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600',
+                                                                            item.current ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600 dark:text-primary',
                                                                             'h-6 w-6 shrink-0'
                                                                         )}
                                                                         aria-hidden="true"
@@ -226,8 +224,8 @@ export default function AdminSidebar({
                                                                     : <span
                                                                         className={classNames(
                                                                             item.current
-                                                                                ? 'text-primary-600 border-primary-600 bg-primary-50'
-                                                                                : 'text-gray-400 border-gray-200 group-hover:border-primary-600 group-hover:text-primary-600',
+                                                                                ? 'text-primary-600 border-primary-600 bg-primary-50 dark:bg-primary/20'
+                                                                                : 'text-gray-400 dark:bg-primary/10 border-gray-200 dark:border-primary/20 group-hover:border-primary-600 group-hover:text-primary-600',
                                                                             'flex h-6 w-6 flex-shrink-0 text-xs items-center justify-center rounded-lg border text-[0.625rem] font-bold bg-white'
                                                                         )}
                                                                     >
@@ -237,7 +235,7 @@ export default function AdminSidebar({
                                                                 <span>{item.name}</span>
 
                                                                 {item?.new
-                                                                    ? <span className={classNames('px-1.5 drop-shadow-sm ml-auto flex items-center justify-center h-4 text-[0.6rem] rounded-md font-black text-red-600 bg-white')}>{item.new}</span>
+                                                                    ? <span className={classNames('px-1.5 drop-shadow-sm ml-auto flex items-center justify-center h-4 text-[0.6rem] rounded-md font-black text-red-600 dark:text-white bg-background')}>{item.new}</span>
                                                                     : ``
                                                                 }
                                                             </a>
@@ -254,7 +252,7 @@ export default function AdminSidebar({
                 </div>
             </div>
 
-            <div className={classNames( collapsed ? " lg:pl-0": " lg:pl-72", "sticky transition-all h-20 top-0 z-40 flex border-b items-center gap-x-6 bg-white px-4 py-4 sm:px-6")}>
+            <div className={classNames( collapsed ? " lg:pl-0": " lg:pl-72", "sticky transition-all h-20 top-0 z-40 flex border-b items-center gap-x-6 bg-background px-4 py-4 sm:px-6")}>
 
                 <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
                     <span className="sr-only">Open sidebar</span>
@@ -268,20 +266,23 @@ export default function AdminSidebar({
 
                 <div className='lg:px-5 w-full'>
                     <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-black/30 absolute top-1/2 -translate-y-1/2 left-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-foreground absolute top-1/2 -translate-y-1/2 left-2">
                             <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clipRule="evenodd" />
                         </svg>
 
-                        <input type="text" placeholder='Search Everything!' className='pl-8 w-full px-2 text-sm max-w-sm rounded-md font-medium py-2 border-none bg-white ring-2 focus:ring-2 focus:ring-primary/50 ring-black/10'/>
+                        <input type="text" placeholder='Search Everything!' className='pl-8 w-full px-2 text-sm dark:text-white max-w-sm rounded-md font-medium py-2 border-none bg-background ring-2 focus:ring-2 focus:ring-primary/50 ring-black/10 dark:ring-white/10'/>
                     </div>
                 </div>
 
                 <div className='flex justify-end flex-shrink-0 items-center gap-x-4'>
-                    <a href="#" className='rounded-full relative ring-2 ring-white'>
+
+                    <a href="#" className='rounded-full relative ring-2 ring-white dark:ring-background'>
                         <BellIcon className="h-[1.5rem] w-[1.5rem] text-slate-500"/>
                     </a>
 
-                    <a href="#" className='rounded-full relative ring-2 ring-white drop-shadow'>
+                    <ModeToggle/>
+
+                    <a href="#" className='rounded-full relative ring-2 ring-white dark:ring-primary-400 drop-shadow'>
                         <span className="sr-only">Leat Sophat</span>
                         <img
                             className="h-8 w-8 object-cover rounded-full bg-gray-50"
@@ -296,13 +297,13 @@ export default function AdminSidebar({
                         />
                         <span className="absolute -bottom-0.5 right-0 flex h-2 w-2 ring-2 ring-white rounded-full">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-600"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-600 "></span>
                         </span>
                     </a>
                 </div>
             </div>
             <main className={classNames( collapsed ? 'lg:pl-0' :'lg:pl-72', 'transition-all')}>
-                {children}
+                {/* {children} */}
             </main>
         </>
     )

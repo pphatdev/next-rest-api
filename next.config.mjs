@@ -2,6 +2,7 @@
 const nextConfig = {
     experimental: {
         typedRoutes: false,
+        taint: true,
     },
 }
 
