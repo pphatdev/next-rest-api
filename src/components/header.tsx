@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { ModeToggle } from './mode-toggle';
-import LoginButton from './ui/login-button';
+// import { ModeToggle } from './mode-toggle';
+// import LoginButton from './ui/login-button';
 
 const menu = [
     {
@@ -46,9 +46,9 @@ export const Header = () => {
                             </li>
                         ))}
                     </ul>
-                    <ModeToggle/>
-                    <LoginButton/>
-                    {/* <Link href={'/login'} className='rounded-md font-medium font-poppins text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2'>Login</Link> */}
+                    {/* <ModeToggle/> */}
+                    {/* <LoginButton/> */}
+                    <Link href={'/login'} className='rounded-md font-medium font-poppins text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2'>Login</Link>
                 </nav>
             </header>
         </div>

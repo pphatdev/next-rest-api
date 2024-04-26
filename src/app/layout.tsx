@@ -23,7 +23,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning={true}>
             <body
                 className={
                     cn(
@@ -32,8 +32,7 @@ export default function RootLayout({
                         poppins.className,
                         fontSans.className
                     )
-                }
-                suppressHydrationWarning={true}>
+                }>
 
                 <ThemeProvider
                     attribute="class"

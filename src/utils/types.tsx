@@ -12,3 +12,35 @@ export type User = {
     email: string
     created_at: Date
 }
+
+export type AdminContainer = {
+    children?: React.ReactNode
+    className?: string
+    style?: React.CSSProperties
+}
+
+export type ButtonType = AdminContainer & {
+    props?: any
+    href?: string
+}
+
+export type ListChildren = Array<{
+    id: number | string
+    name?: string
+    href?: string
+    initial?: string
+    icon?: any
+    new?: number | 0
+    current?: boolean
+}>
+
+export type ModuleList = Array<Omit<ListChildren[0], "new" | "icon" | "initial"> & { children: ListChildren }>;
+
+
+// export type ModuleList = Array<{
+//     id: number | string
+//     name?: string
+//     href?: string
+//     current?: boolean
+//     children: ListChildren
+// }>;

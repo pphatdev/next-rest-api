@@ -4,6 +4,9 @@ const nextConfig = {
         typedRoutes: false,
         taint: true,
     },
+    images: {
+        domains: ['avatars.githubusercontent.com'],
+    },
 }
 
 export default nextConfig
