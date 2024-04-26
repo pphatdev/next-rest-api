@@ -2,7 +2,12 @@ import { classNames } from "@/utils/class-name";
 import { ModuleList } from "@/utils/types"
 import { usePathname } from "next/navigation";
 
-const AdminSidebarList: React.FC<{ modules: ModuleList }> = ({ modules }) => {
+const AdminSidebarList: React.FC<{
+    modules: ModuleList
+}> = (
+    { modules }
+) => {
+
     const pathname = usePathname()
     return (
         <nav className="flex flex-1 pt-3 flex-col px-6">

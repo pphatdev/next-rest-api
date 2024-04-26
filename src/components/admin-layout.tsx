@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 }
 
 const AdminLayout: React.FC<{
-    children?: string,
+    children?: React.ReactNode,
     classNames?: string
 }> = ({
     children,

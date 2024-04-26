@@ -34,9 +34,19 @@ export type ListChildren = Array<{
     current?: boolean
 }>
 
-export type ModuleList = Array<Omit<ListChildren[0], "new" | "icon" | "initial"> & { children: ListChildren }>;
+export type ModuleList = Array<
+    Omit<ListChildren[0], "new" | "icon" | "initial">
+    & { children: ListChildren }
+>;
+
+export type Breadcrumb = Array<{
+    name: string;
+    href?: string | undefined | null;
+    current?: boolean
+}>
 
 
+// Expected
 // export type ModuleList = Array<{
 //     id: number | string
 //     name?: string

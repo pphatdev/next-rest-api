@@ -1,13 +1,17 @@
-import { Container } from '@/components/container';
-import Header from '@/components/header';
 import AdminLayout from '../../../../components/admin-layout';
+import AdminBreadcrumb from '@/components/admin-breadcrumb';
 
 export default function Home() {
+    const pages = [
+        { name: 'Dashboards', href: '/admin/dashboard', current: false},
+        { name: 'Projects', href: null, current: false },
+    ]
     return (
-        <>
-            <AdminLayout>
-                ss
-            </AdminLayout>
-        </>
+        <AdminLayout>
+            <header className='flex items-center justify-between gap-3'>
+                <AdminBreadcrumb pages={pages}/>
+                <AdminBreadcrumb pages={pages}/>
+            </header>
+        </AdminLayout>
     );
 }
