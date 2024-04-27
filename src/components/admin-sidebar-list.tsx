@@ -1,5 +1,5 @@
-import { classNames } from "@/utils/class-name";
-import { ModuleList } from "@/utils/types"
+import { classNames } from "@/lib/class-name";
+import { ModuleList } from "@/lib/types"
 import { usePathname } from "next/navigation";
 
 const AdminSidebarList: React.FC<{

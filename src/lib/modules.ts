@@ -1,4 +1,4 @@
-import { ChartPieIcon } from "@heroicons/react/24/outline";
+import { ChartPieIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 
 export const modules = [
     {
@@ -14,7 +14,7 @@ export const modules = [
         name: 'Projects',
         href: '/',
         children: [
-            { id: 1, name: 'Projects', href: '/admin/projects', initial: 'P', icon: null, new: 0, current: false },
+            { id: 1, name: 'Contributors', href: '/admin/projects/users', initial: 'P', icon: UserGroupIcon, new: 0, current: false },
         ]
     }
 ]

@@ -46,6 +46,22 @@ export type Breadcrumb = Array<{
 }>
 
 
+export type Paginations = {
+    prev?: {
+        status?: boolean
+        url?: string
+    },
+    items?: Array<{
+        label?: string,
+        url?: string,
+        active?: boolean,
+    }>,
+    next?: {
+        status?: boolean
+        url?: string
+    }
+}
+
 // Expected
 // export type ModuleList = Array<{
 //     id: number | string

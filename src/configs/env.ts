@@ -16,15 +16,15 @@ export const DB_PWD: DBPassword = process.env.DB_PWD || "123";
  * Paginations
  */
 export const PAGINATION: Page = 1;
-export const PAGE_LIMIT: Limit = "*";
+export const PAGE_LIMIT: Limit = 10;
 export const DATA_SEARCH: Search = null;
 export const DATA_SORT: SortBy = "asc";
 
 
 export const DBConfig: DB = {
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT) || 5432,
-    database: process.env.DB_NAME || "postgres",
-    user: process.env.DB_USER || "postgres",
-    password: process.env.DB_PWD || "123",
+    host: DB_HOST,
+    port: DB_PORT,
+    database: DB_NAME,
+    user: DB_USER,
+    password: DB_PWD,
 }

@@ -38,7 +38,7 @@ const AdminLayout: React.FC<{
                 'flex w-full bg-gray-50'
             )
         }>
-            <div className='w-72 h-screen shrink-0 text-slate-900 font-poppins border-r border-black/10'>
+            <div className='absolute -left-full transition-all md:left-0 md:relative md:block w-72 h-screen shrink-0 text-slate-900 font-poppins border-r border-black/10'>
                 <AdminSidebarLogo/>
                 <AdminSidebarList modules={modules}/>
             </div>

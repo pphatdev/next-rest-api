@@ -1,8 +1,8 @@
 "use client"
-import { Breadcrumb } from "@/utils/types";
+import { Breadcrumb } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import AdminTitle from "./admin-title";
-import { classNames } from "@/utils/class-name";
+import { classNames } from "@/lib/class-name";
 
 const AdminBreadcrumb: React.FC<{
     pages: Breadcrumb

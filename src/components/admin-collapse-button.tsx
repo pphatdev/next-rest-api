@@ -1,5 +1,5 @@
 "use client"
-import { ButtonType as T } from "@/utils/types";
+import { ButtonType as T } from "@/lib/types";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 

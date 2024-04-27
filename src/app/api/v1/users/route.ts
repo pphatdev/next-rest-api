@@ -3,6 +3,7 @@ import { client } from "@/configs/db";
 import { requestAll } from "@/helpers/request";
 import { Pagination } from "@/helpers/pagination";
 import { Response } from "@/helpers/response";
+import { DBConfig, PAGE_LIMIT } from "@/configs/env";
 
 const pagination    = new Pagination();
 const response      = new Response()
@@ -34,13 +35,17 @@ export const GET = async (req: NextRequest) =>
                     withWere: true
                 },
                 sort: {
-                    column: [ "name"],
+                    column: [ "id" ],
                     value: sort
                 }
             }
         )
         const reponse = await client.query(query, [])
-        return response.success(reponse.rows, total)
+        return response.success(
+            reponse.rows,
+            total,
+            request
+        )
     } catch (error) {
         console.log(error)
     }
