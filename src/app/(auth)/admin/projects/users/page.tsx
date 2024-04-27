@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { fetchData } from '@/lib/fetch';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/elements/pagination';
 import { Paginations } from '@/lib/types';
+import { classNames } from '@/lib/class-name';
 
 const pages = [
     { name: 'Projects', href: '/admin/projects', current: false},
@@ -80,15 +81,15 @@ export default function Users(request: any)
                 <Pagination className='mt-5'>
                     <PaginationContent>
                         <PaginationItem>
-                            <PaginationPrevious href={pagination.prev?.url} className={!pagination.prev?.status? `pointer-events-none`:''}/>
+                            <PaginationPrevious href={pagination.prev?.url} className={!pagination.prev?.status? `pointer-events-none`:'hover:drop-shadow hover:bg-white'}/>
                         </PaginationItem>
                         {pagination.items?.map((item: any, index: number) => (
                             <PaginationItem key={index}>
-                                <PaginationLink href={item.url}>{item.label}</PaginationLink>
+                                <PaginationLink href={item.url} className={ classNames(item.active ? `bg-white drop-shadow`:`hover:bg-white`, 'hover:drop-shadow hover:bg-white')}>{item.label}</PaginationLink>
                             </PaginationItem>
                         ))}
                         <PaginationItem>
-                            <PaginationNext href={pagination.next?.url} className={!pagination.next?.status? `pointer-events-none`:''}/>
+                            <PaginationNext href={pagination.next?.url} className={!pagination.next?.status? `pointer-events-none`:'hover:drop-shadow hover:bg-white'}/>
                         </PaginationItem>
                     </PaginationContent>
                 </Pagination>
