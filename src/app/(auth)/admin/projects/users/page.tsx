@@ -57,7 +57,7 @@ export default function Users(request: any)
         const getData = async (paramSearch?: string) => {
             const url = `${paramSearch? api + paramSearch :currentAPI }`
             const data = await fetchData(url);
-            setData(data.result || {})
+            setData(data.result || [])
             setPagination(data.pagination.buttons || {})
             setIsLoading(false)
         };
