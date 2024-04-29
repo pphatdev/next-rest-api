@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
 const config = {
-    darkMode: ["class"],
+    darkMode: "class",
     content: [
         "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
         './src/components/**/*.{ts,tsx}',
