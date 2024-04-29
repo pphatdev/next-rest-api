@@ -3,7 +3,7 @@
 import AdminLayout from '../../../../../components/admin-layout';
 import AdminBreadcrumb from '@/components/admin-breadcrumb';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/elements/table';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { fetchData } from '@/lib/fetch';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/elements/pagination';
 import { Paginations } from '@/lib/types';
@@ -69,13 +69,10 @@ export default function Users(request: any)
         router.push(currentURL + updatedParams)
     }, [ page, limit, search, sort ]);
 
-    const searchQuery = (e:any) => {
-        setSearch(e.target.value)
-    }
 
-    const viewHandle = () => {
-
-    }
+    const searchQuery = useCallback((event: any) => {
+        setSearch(event.target.value);
+    }, []);
 
     return (
         <AdminLayout>
