@@ -35,10 +35,10 @@ const AdminLayout: React.FC<{
                 classNames,
                 poppins.className,
                 inter.className,
-                'flex w-full bg-gray-50'
+                'flex w-full bg-gray-50 h-svh overflow-y-auto'
             )
         }>
-            <div className='absolute -left-full transition-all md:left-0 md:relative md:block w-72 h-screen shrink-0 text-slate-900 font-poppins border-r border-black/10'>
+            <div className='fixed -left-full transition-all md:left-0 md:sticky md:block w-72 h-screen shrink-0 text-slate-900 font-poppins border-r border-black/10'>
                 <AdminSidebarLogo/>
                 <AdminSidebarList modules={modules}/>
             </div>

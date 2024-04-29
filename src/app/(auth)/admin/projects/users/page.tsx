@@ -15,6 +15,8 @@ import { SearchItems } from '@/components/elements/search-items';
 import { Button } from '@/components/elements/button';
 import { classNames } from '@/lib/class-name';
 import { DOMAIN } from '@/configs/env';
+import { Skeleton } from '@/components/elements/skeleton';
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 
 const pages = [
     { name: 'Projects', href: '/admin/projects', current: false},
@@ -71,6 +73,9 @@ export default function Users(request: any)
         setSearch(e.target.value)
     }
 
+    const viewHandle = () => {
+
+    }
 
     return (
         <AdminLayout>
@@ -94,13 +99,13 @@ export default function Users(request: any)
                     </Button>
 
                     <div className='flex items-center'>
-                        <Button size={'icon'} variant={'outline'} className='rounded-r-none' onClick={()=>setView('grid')}>
+                        <Button size={'icon'} variant={'outline'} className='rounded-r-none' onClick={()=>{setView('grid'), setLimit(10)}}>
                             <svg className={classNames( view == 'grid' ? 'text-primary' : 'text-slate-300', 'h-6 w-6')} viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 3.5V11.5H11V3.5H3ZM9 9.5H5V5.5H9V9.5ZM3 13.5V21.5H11V13.5H3ZM9 19.5H5V15.5H9V19.5ZM13 3.5V11.5H21V3.5H13ZM19 9.5H15V5.5H19V9.5ZM13 13.5V21.5H21V13.5H13ZM19 19.5H15V15.5H19V19.5Z" fill="currentColor"/>
                             </svg>
                         </Button>
 
-                        <Button size={'icon'} variant={'outline'} className='rounded-l-none border-l-0' onClick={()=>setView('table')}>
+                        <Button size={'icon'} variant={'outline'} className='rounded-l-none border-l-0' onClick={()=>{setView('table'), setLimit(32)}}>
                             <svg className={classNames( view == 'table' ? 'text-primary' : 'text-slate-300', 'h-6 w-6')} viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 18.5H21V16.5H3V18.5ZM3 13.5H21V11.5H3V13.5ZM3 6.5V8.5H21V6.5H3Z"  fill="currentColor"/>
                             </svg>
@@ -143,7 +148,56 @@ export default function Users(request: any)
                             }
                         </TableBody>
                     </Table>
-                    : ""
+                    : <div>
+                        {
+                            isLoading
+                            ? <div className='px-4 py-3 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:sm:grid-cols-4'>
+                                <div className="flex items-center space-x-4">
+                                    <Skeleton className="h-12 w-12 flex-shrink-0 rounded-full" />
+                                    <div className="space-y-2 w-full">
+                                        <Skeleton className="h-4 w-full md:w-[250px]" />
+                                        <Skeleton className="h-4 w-full md:w-[200px]" />
+                                    </div>
+                                </div>
+                                <div className="flex items-center space-x-4">
+                                    <Skeleton className="h-12 w-12 flex-shrink-0 rounded-full" />
+                                    <div className="space-y-2 w-full">
+                                        <Skeleton className="h-4 w-full md:w-[250px]" />
+                                        <Skeleton className="h-4 w-full md:w-[200px]" />
+                                    </div>
+                                </div>
+                                <div className="flex items-center space-x-4">
+                                    <Skeleton className="h-12 w-12 flex-shrink-0 rounded-full" />
+                                    <div className="space-y-2 w-full">
+                                        <Skeleton className="h-4 w-full md:w-[250px]" />
+                                        <Skeleton className="h-4 w-full md:w-[200px]" />
+                                    </div>
+                                </div>
+                                <div className="flex items-center space-x-4">
+                                    <Skeleton className="h-12 w-12 flex-shrink-0 rounded-full" />
+                                    <div className="space-y-2 w-full">
+                                        <Skeleton className="h-4 w-full md:w-[250px]" />
+                                        <Skeleton className="h-4 w-full md:w-[200px]" />
+                                    </div>
+                                </div>
+                            </div>
+                            : <div className='grid grid-cols-1 odd:divide-y sm:grid-cols-2 md:grid-cols-2 lg:sm:grid-cols-4'>
+                                { Array.from(data).map((user: any, key: number) => (
+                                        <div key={key} className="flex items-center space-x-4 p-3">
+                                            <Avatar className='flex-shrink-0'>
+                                                <AvatarImage src="https://github.com/shadcn.png" width={50} height={50} className='rounded-full' alt="@shadcn" />
+                                                <AvatarFallback>CN</AvatarFallback>
+                                            </Avatar>
+                                            <div className="space-y-2 w-full">
+                                                <h1 className='leading-tight font-medium'>{user.name}</h1>
+                                                <p className='text-sm text-black/70'>{user.email}</p>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        }
+                    </div>
                 }
 
 
