@@ -4,6 +4,7 @@ import { DB, DBHost, DBName, DBPassword, DBPort, DBUser, Limit, Page, Search, So
 export const VERSION: Version = process.env.VERSION || "1.0.0";
 export const APP_NAME: string = process.env.APP_NAME || "Restful API";
 export const NODE_ENV: string = process.env.NODE_ENV || "development";
+export const DOMAIN: string = process.env.DOMAIN || "http://localhost:3000";
 
 
 export const DB_HOST: DBHost = process.env.DB_HOST || "localhost";

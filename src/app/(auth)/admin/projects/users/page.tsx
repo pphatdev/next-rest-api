@@ -15,6 +15,7 @@ import { SearchItems } from '@/components/elements/search-items';
 import { Button } from '@/components/elements/button';
 import { Select, SelectItem } from "@nextui-org/react";
 import { classNames } from '@/lib/class-name';
+import { DOMAIN } from '@/configs/env';
 
 const pages = [
     { name: 'Projects', href: '/admin/projects', current: false},
@@ -68,7 +69,8 @@ export default function Users(request: any)
     const [pagination, setPagination] = useState<Paginations>({})
 
     const [paramSearch, setParamSearch] = useState("");
-    const [currentAPI, setCurrentAPI] = useState(`http://localhost:3000/api/v1/users?page=${page}&limit=${limit}&search=${search}&sort=${sort}`);
+
+    const [currentAPI, setCurrentAPI] = useState(`${DOMAIN}/api/v1/users?page=${page}&limit=${limit}&search=${search}&sort=${sort}`);
 
     const [view, setView] = useState("table")
 
