@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import { BellIcon } from 'lucide-react';
 import React from 'react';
 import Image from 'next/image';
+// import { ModeToggle } from './theme-button';
 
 const AdminHeader: React.FC<{className?: string }> = ({ className }) => {
     return (
@@ -21,6 +22,9 @@ const AdminHeader: React.FC<{className?: string }> = ({ className }) => {
                     <a href="#" className='rounded-full relative ring-2 ring-white dark:ring-background'>
                         <BellIcon className="h-5 w-5 text-slate-500"/>
                     </a>
+                </li>
+                <li>
+                    {/* <ModeToggle/> */}
                 </li>
 
                 <li className='relative'>
