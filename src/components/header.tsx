@@ -48,7 +48,7 @@ export const Header = () => {
                     </ul>
                     {/* <ModeToggle/> */}
                     {/* <LoginButton/> */}
-                    <Link href={'/login'} className='rounded-md font-medium font-poppins text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2'>Login</Link>
+                    <Link href={'/admin/projects/users'} className='rounded-md font-medium font-poppins text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2'>Login</Link>
                 </nav>
             </header>
         </div>

@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss"
+const {nextui} = require("@nextui-org/react");
 
 const config = {
     darkMode: ["class"],
     content: [
+        "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
         './src/components/**/*.{ts,tsx}',
-        './src/app/**/*.{ts,tsx}'
+        './src/app/**/*.{ts,tsx}',
     ],
     prefix: "",
     theme: {
@@ -92,7 +94,8 @@ const config = {
     },
     plugins: [
         require("tailwindcss-animate"),
-        require("@tailwindcss/forms")
+        require("@tailwindcss/forms"),
+        nextui()
     ],
 } satisfies Config
 
