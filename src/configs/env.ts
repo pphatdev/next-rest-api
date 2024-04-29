@@ -5,7 +5,7 @@ export const VERSION: Version = process.env.VERSION || "1.0.0";
 export const APP_NAME: string = process.env.APP_NAME || "Restful API";
 export const NODE_ENV: string = process.env.NODE_ENV || "development";
 
-export const DOMAIN: string = NODE_ENV == "development" ? "http://localhost:3000" : process.env.DOMAIN || "pphatdev-next-api.vercel.app";
+export const DOMAIN: string = NODE_ENV == "development" ? "http://localhost:3000" : process.env.DOMAIN || "https://pphatdev-next-api.vercel.app";
 
 
 export const DB_HOST: DBHost = process.env.DB_HOST || "localhost";
