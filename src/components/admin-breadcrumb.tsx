@@ -1,6 +1,6 @@
 "use client"
 import { Breadcrumb } from "@/lib/types";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import AdminTitle from "./admin-title";
 import { classNames } from "@/lib/class-name";
 
@@ -13,7 +13,7 @@ const AdminBreadcrumb: React.FC<{
 
     return (
         <nav>
-            <ol role="list" className="flex items-center space-x-4">
+            <ol role="list" className="flex text-xs sm:text-sm items-center space-x-4">
                 {Array.from(pages).map((page, index) => (
                     <li key={index}>
                         <div className="flex items-center">
