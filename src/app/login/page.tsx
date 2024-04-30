@@ -19,7 +19,7 @@ export default function Login() {
     const [password, setPassword] = useState('123')
     return(
         <StarBoard>
-            <div className="absolute z-1 inset-0 overflow-hidden opacity-20">
+            <div className="absolute bg-black z-1 inset-0 overflow-hidden opacity-20">
                 <div className="jumbo absolute -inset-[10px] opacity-50"></div>
             </div>
             <Container>

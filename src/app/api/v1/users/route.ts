@@ -3,12 +3,12 @@ import { client } from "@/configs/db";
 import { requestAll } from "@/helpers/request";
 import { Pagination } from "@/helpers/pagination";
 import { Response } from "@/helpers/response";
-import { DBConfig, PAGE_LIMIT } from "@/configs/env";
+import { NextApiResponse } from "next";
 
 const pagination    = new Pagination();
 const response      = new Response()
 
-export const GET = async (req: NextRequest) =>
+export const GET = async (req: NextRequest, res: NextApiResponse ) =>
 {
     try {
         const request = requestAll(req);

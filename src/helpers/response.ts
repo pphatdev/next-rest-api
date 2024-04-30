@@ -48,16 +48,27 @@ export class Response
                     /**
                      *  Generate page list items
                     */
-                    items: Array.from({ length: 5 }, (_, i) => {
+                    items: Array.from({ length: 2 }, (_, i) => {
                         const offset = Math.min(i, totalPages - page);
                         const pageNumber = page + offset;
-                        // const pageNumber = Math.max(1, Math.min(Number(page) - 2 + i, totalPages));
                         return {
                             label: String(pageNumber),
                             url: `?page=${pageNumber}${params}`,
                             active: page == pageNumber
                         };
-                    }),
+                    })
+                    .concat(
+                        {
+                            label: "...",
+                            url: `#`,
+                            active: false
+                        },
+                        {
+                            label: String(totalPages),
+                            url: `?page=${totalPages}${params}`,
+                            active: page == totalPages
+                        }
+                    ),
                     /**
                      *  Check Next button
                     */

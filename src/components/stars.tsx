@@ -90,7 +90,7 @@ export const StarBoard = ({ children,}: Readonly<{ children: React.ReactNode; }>
             <>
                 <Particles
                     id="tsparticles"
-                    className="fixed z-0 inset-0"
+                    className="fixed z-0 inset-0 bg-black/90"
                     particlesLoaded={particlesLoaded}
                     options={options}
                 />

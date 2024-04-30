@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "../styles/globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider"
+// import { ThemeProvider } from "@/components/theme-provider"
 import { APP_NAME } from "@/configs/env";
 
 const fontSans = Inter({
@@ -17,11 +17,8 @@ export const metadata: Metadata = {
     description: APP_NAME,
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+
     return (
         <html lang="en" suppressHydrationWarning={true}>
             <body
