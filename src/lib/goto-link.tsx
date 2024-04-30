@@ -64,7 +64,7 @@ export const useUpdateParamSearch = (
         urlObject = {...urlObject, [key]: value }
     });
 
-    Object.assign(urlObject, { page: page, limit: limit, search: search, sort: sort });
+    Object.assign(urlObject, { page: page, limit: limit, sort: sort, search: search || "" });
 
     const paramString: string = Object.entries(urlObject).flatMap(([key, value]) => (value ? [`${key}=${value}`] : [])).join("&");
 
