@@ -52,9 +52,10 @@ export default function Users(request: any)
         setParamSearch(updatedParams)
 
         const getData = async (paramSearch?: string) => {
-            const url = `${paramSearch? apiURL + paramSearch : currentAPI }`
+            const url = `${ paramSearch? apiURL + paramSearch : currentAPI }`
             const data = await fetchData(url);
             console.log(url, data)
+
             setData(data?.result || [])
             setPagination(data?.pagination?.buttons || {})
             setIsLoading(false)
