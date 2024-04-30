@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 type UseURL = {
     page?: string | number,
     limit?: string | number,
-    search?: string | null,
+    search?: string,
     sort?: string
 }
 
@@ -15,7 +15,7 @@ export const Goto = ( path: string ): void => {
 export const useUpdateUrl: any = (
     page?: string | number,
     limit?: string | number,
-    search?: string | null,
+    search?: string,
     sort?: string
 ) => {
 
@@ -46,7 +46,7 @@ export const useUpdateUrl: any = (
 export const useUpdateParamSearch = (
     page?: string | number,
     limit?: string | number,
-    search?: string | null,
+    search?: string,
     sort?: string
 ) => {
 
