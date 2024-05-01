@@ -1,27 +1,31 @@
 import { Paginations } from '@/lib/types';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "./elements/pagination"
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "./elements/pagination"
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const ContentPagination: React.FC<{ pagination: Paginations }> = ({
+const ContentPagination: React.FC<{ pagination: Paginations, setPage: (page: number) => void, currentPage: number }> = ({
     pagination,
+    setPage,
+    currentPage
 }) => {
     return (
-        <Pagination className="scale-90 sm:scale-100 mt-5">
+        <Pagination className="scale-90 sm:scale-100 mt-5 select-none">
             <PaginationContent>
                 <PaginationItem>
                     <PaginationLink
-                        href={pagination.prev?.url}
+                        onClick={() => setPage(Number(currentPage) - 1)}
+                        // href={pagination.prev?.url}
                         className={
                             !pagination.prev?.status
                                 ? `pointer-events-none`
-                                : "hover:drop-shadow hover:bg-white"
+                                : "hover:drop-shadow hover:bg-white cursor-pointer"
                         }>
                         <ChevronLeft className="h-4 w-4" />
                     </PaginationLink>
                 </PaginationItem>
-                {pagination.items?.slice(0,5).map((item: any, index: number) => (
+                {pagination.items?.map((item: any, index: number) => (
                     <PaginationItem key={index}>
                         <PaginationLink
+                            onClick={() => setPage(Number(item.label))}
                             href={item.url}
                             isActive={item.active}
                             className="hover:drop-shadow hover:bg-white"
@@ -32,11 +36,12 @@ const ContentPagination: React.FC<{ pagination: Paginations }> = ({
                 ))}
                 <PaginationItem>
                     <PaginationLink
-                        href={pagination.next?.url}
+                        onClick={() => setPage(Number(currentPage) + 1)}
+                        // href={pagination.next?.url}
                         className={
                             !pagination.next?.status
                                 ? `pointer-events-none`
-                                : "hover:drop-shadow hover:bg-white"
+                                : "hover:drop-shadow hover:bg-white cursor-pointer"
                         }>
                         <ChevronRight className="h-4 w-4" />
                     </PaginationLink>

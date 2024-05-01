@@ -11,7 +11,7 @@ const AdminSidebarList: React.FC<{
     const pathname = usePathname()
     return (
         <nav className="flex flex-1 pt-3 flex-col px-6">
-            <ul role="list" className="flex flex-1 flex-col gap-y-7">
+            <ul role="list" className="flex flex-1 flex-col gap-y-3">
                 {modules.map((menu, index) => (
                     <li key={index}>
                         <div className='-mx-2 flex justify-between mt-2 text-sm uppercase font-bold font-poppins leading-6 text-[#98A2B2]'>

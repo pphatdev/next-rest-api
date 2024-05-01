@@ -1,13 +1,24 @@
 import { PAGE_LIMIT, VERSION } from "@/configs/env"
 import { NextResponse } from "next/server"
 
+interface PaginationButton {
+    label: string;
+    url: string;
+    active: boolean;
+}
+
+interface Pagination {
+    totalPages: number;
+    currentPage: number;
+}
+
 export class Response
 {
     init = (params: object) => {
         return NextResponse.json(params)
     }
 
-    success = (data: object, total?: number , request?: any, ...options: any[]) =>
+    success = (data: object, total?: number , request?: any) =>
     {
         const { page, limit, search, sort } = request
 
@@ -48,27 +59,7 @@ export class Response
                     /**
                      *  Generate page list items
                     */
-                    items: Array.from({ length: 2 }, (_, i) => {
-                        const offset = Math.min(i, totalPages - page);
-                        const pageNumber = page + offset;
-                        return {
-                            label: String(pageNumber),
-                            url: `?page=${pageNumber}${params}`,
-                            active: page == pageNumber
-                        };
-                    })
-                    .concat(
-                        {
-                            label: "...",
-                            url: `#`,
-                            active: false
-                        },
-                        {
-                            label: String(totalPages),
-                            url: `?page=${totalPages}${params}`,
-                            active: page == totalPages
-                        }
-                    ),
+                    items: this.filterPaginationButtons({totalPages: totalPages, currentPage: page}),
                     /**
                      *  Check Next button
                     */
@@ -153,5 +144,64 @@ export class Response
             result: message,
             ...options
         })
+    }
+
+    filterPaginationButtons = (pagination: Pagination): PaginationButton[] => {
+        const buttons: PaginationButton[] = [];
+        const range = 1; // number of buttons to show before and after the current page
+
+        if (pagination.totalPages <= range * 2 + 1) {
+            // if total pages is less than or equal to 7, show all buttons
+            for (let i = 1; i <= pagination.totalPages; i++) {
+                buttons.push({
+                    label: `${i}`,
+                    url: `?page=${i}&limit=10&sort=asc`,
+                    active: i === pagination.currentPage,
+                });
+            }
+        } else {
+            // if total pages is greater than 7, show only a subset of buttons
+            const start = Math.max(1, pagination.currentPage - range);
+            const end = Math.min(pagination.totalPages, pagination.currentPage + range);
+
+            if (start > 2) {
+                buttons.push({
+                    label: `1`,
+                    url: `?page=1&limit=10&sort=asc`,
+                    active: false,
+                });
+                if (start > 3) {
+                    buttons.push({
+                        label: `...`,
+                        url: `#`,
+                        active: false,
+                    });
+                }
+            }
+
+            for (let i = start; i <= end; i++) {
+                buttons.push({
+                    label: `${i}`,
+                    url: `?page=${i}&limit=10&sort=asc`,
+                    active: i === pagination.currentPage,
+                });
+            }
+
+            if (end < pagination.totalPages - 1) {
+                if (end < pagination.totalPages - 2) {
+                    buttons.push({
+                        label: `...`,
+                        url: `#`,
+                        active: false,
+                    });
+                }
+                buttons.push({
+                    label: `${pagination.totalPages}`,
+                    url: `?page=${pagination.totalPages}&limit=10&sort=asc`,
+                    active: false,
+                });
+            }
+        }
+        return buttons;
     }
 }

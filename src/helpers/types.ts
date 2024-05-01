@@ -57,7 +57,8 @@ export type Options = {
     page: Page,
     limit: Limit,
     search: Searches,
-    sort: Sort
+    sort: Sort,
+    showTotal?: boolean
 }
 
 

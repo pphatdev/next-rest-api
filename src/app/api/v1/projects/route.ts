@@ -3,19 +3,18 @@ import { client } from "@/configs/db";
 import { requestAll } from "@/helpers/request";
 import { Pagination } from "@/helpers/pagination";
 import { Response } from "@/helpers/response";
+
 const pagination    = new Pagination();
 const response      = new Response()
 
-export const GET = async (req: NextRequest ) =>
-{
+export const GET = async (req: NextRequest ) => {
     try {
         const request = requestAll(req);
         const { page, limit, search, sort } = request
-
         const query = await pagination.query(
             {
-                table: 'public.users',
-                selectColumns: ["id", "name", "email", "created_at", "updated_at"],
+                table: 'public.projects',
+                selectColumns: ["id", "name", "description", "icon", "live", "source", "created_date"],
                 conditions: {
                     operator: 'WHERE',
                     value: ''

@@ -1,6 +1,6 @@
 "use client"
 
-import AdminLayout from '../../../../../components/admin-layout';
+import AdminLayout from '../../../../components/admin-layout';
 import AdminBreadcrumb from '@/components/admin-breadcrumb';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/elements/table';
 import { useEffect, useState } from 'react';
@@ -51,7 +51,6 @@ export default function Users(request: any)
         const updatedParams = useUpdateParamSearch( page, limit, search, sort );
         setParamSearch(updatedParams)
 
-
         const getData = async (paramSearch?: string) => {
             const url   = `${paramSearch ? apiURL + paramSearch : currentAPI}`;
             const res   = await axios.get(url)
@@ -65,7 +64,8 @@ export default function Users(request: any)
         getData(paramSearch)
 
         router.push(currentURL + updatedParams)
-    }, [ page, limit, search, sort ]);
+    }, [ page, limit, search, sort]);
+
 
     const searchQuery = (event: any) => {
         setSearch(event.target.value)
@@ -151,7 +151,10 @@ export default function Users(request: any)
             {
                 isLoading
                 ? <PaginationLoading/>
-                : <ContentPagination pagination={pagination}/>
+                : <ContentPagination
+                    setPage={setPage}
+                    currentPage={currentPage}
+                    pagination={pagination}/>
             }
         </AdminLayout>
     );

@@ -54,7 +54,7 @@ export default function Login() {
                     </CardContent>
                     <CardFooter className="flex gap-2 justify-end mt-3">
                         <Link href="/" className="transition-all bg-transparent hover:bg-white/5 text-white ring-1 ring-inset ring-primary/10 py-2 px-5 inline-flex items-center justify-center focus:outline-none whitespace-nowrap rounded-md text-sm font-medium">Back</Link>
-                        <LoginButton goto={'/admin/projects/contributors'}/>
+                        <LoginButton goto={'/admin/contributors'}/>
                     </CardFooter>
                 </Card>
                 </div>

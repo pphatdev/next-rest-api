@@ -1,11 +1,12 @@
+import { client } from "@/configs/db"
 import { Options } from "./types"
 
 export class Pagination
 {
 
-    query = ( options: Options ) =>
+    query = async ( options: Options ) =>
     {
-        const { table, selectColumns, conditions, page, limit, search, sort } = options
+        const { table, selectColumns, conditions, page, limit, search, sort, showTotal } = options
 
         /**
          * Declare No value param
@@ -93,12 +94,23 @@ export class Pagination
 
 
         /**
+         * Show Total
+         * @param {String} conditions.value
+         * @return {Boolean} true, false
+         */
+        let total: any = undefined;
+        if (showTotal) {
+            const reponse = await client.query(`SELECT count(id) from ${table}`)
+            total = reponse.rows[0].count || undefined
+        }
+
+
+        /**
          * String Query Returning
          * @example `SELECT column1, column2 FROM table WHERE column1 = '%value%' ORDER BY column1 ASC LIMIT 10 OFFSET 0`
          * @returns {String} query
          */
-        return (
-            `SELECT ${ columns } FROM ${ table }
+        const query = `SELECT ${ columns } FROM ${ table }
             ${ issetSearch
                 ? `WHERE ${ issetcondition
                     ? `${conditions.value} and`
@@ -115,6 +127,13 @@ export class Pagination
                 ? `offset ${(page - 1) * Number(limit)}`
                 : noValue
             }`
+
+
+        return (
+            {
+                sql: query.replaceAll(/(\n+|\s+|\t+)/g, " "),
+                total: total,
+            }
         )
     }
 }
