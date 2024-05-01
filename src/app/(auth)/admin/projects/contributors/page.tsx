@@ -4,7 +4,7 @@ import AdminLayout from '../../../../../components/admin-layout';
 import AdminBreadcrumb from '@/components/admin-breadcrumb';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/elements/table';
 import { useEffect, useState } from 'react';
-import { fetchData } from '@/lib/fetch';
+// import { fetchData } from '@/lib/fetch';
 import { Paginations } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 import { useUpdateParamSearch } from '@/lib/goto-link';
@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { CardLoading } from '@/components/loading';
 import { LeftContentHeader } from '@/components/admin-content-header';
 import { ContentPagination } from '@/components/admin-content-pagination';
+import axios from "axios"
 
 const pages = [
     { name: 'Projects', href: '/admin/projects', current: false},
@@ -42,7 +43,6 @@ export default function Users(request: any)
     const [currentAPI, setCurrentAPI] = useState(`${DOMAIN}/api/v1/users?page=${page}&limit=${limit}&search=${search}&sort=${sort}`);
     const [view, setView] = useState("table")
 
-
     useEffect(() => {
         const originURL = window.location.origin
         const apiURL    = originURL + "/api/v1/users"
@@ -51,17 +51,18 @@ export default function Users(request: any)
         const updatedParams = useUpdateParamSearch( page, limit, search, sort );
         setParamSearch(updatedParams)
 
-        const getData = async (paramSearch?: string) => {
-            const url = `${ paramSearch? apiURL + paramSearch : currentAPI }`
-            const data = await fetchData(url);
-            console.log(url, data)
 
-            setData(data?.result || [])
-            setPagination(data?.pagination?.buttons || {})
-            setIsLoading(false)
+        const getData = async (paramSearch?: string) => {
+            const url   = `${paramSearch ? apiURL + paramSearch : currentAPI}`;
+            const res   = await axios.get(url)
+            const data  = res?.data || {}
+            setData(data?.result || []);
+            setPagination(data?.pagination?.buttons || {});
+            setIsLoading(false);
         };
-        getData(paramSearch)
+
         setCurrentAPI(apiURL + updatedParams)
+        getData(paramSearch)
 
         router.push(currentURL + updatedParams)
     }, [ page, limit, search, sort ]);
@@ -84,6 +85,7 @@ export default function Users(request: any)
                 <AdminBreadcrumb pages={pages}/>
                 <LeftContentHeader
                     handleSearch={searchQuery}
+                    search={search}
                     setGrid={setGrid}
                     setList={setList}
                     view={view}>
