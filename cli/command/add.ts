@@ -1,11 +1,12 @@
 import fs from 'fs';
 import Tree from "console-log-tree";
-
+import { CreateNewFile } from '../types';
 const defaultDir = './src/app/(auth)/admin';
 
-export const addClientFolder = (folderName: string) => {
-
-    if (!fs.existsSync(defaultDir + '/' + folderName.toLocaleLowerCase())) {
+export const addClientFolder = (folderName: string) =>
+{
+    if (!fs.existsSync(defaultDir + '/' + folderName.toLocaleLowerCase()))
+    {
         // If it doesn't exist, create the directory
         fs.mkdirSync(defaultDir + '/' + folderName.toLocaleLowerCase());
         console.log(`Directory '${defaultDir + '/' + folderName}' created. \n`);
@@ -17,12 +18,11 @@ export const addClientFolder = (folderName: string) => {
 };
 
 
-const addFiles = (folderName: string ) => {
-
-    const stubFunctionName = "{_function_name_}"
-    const stubEndpointName = "{_endpoint_name_}"
-
-    const files = fs.readdirSync('./cli/stubs').map( file => { return file })
+const addFiles = (folderName: string ) =>
+{
+    const stubFunctionName  = "{_function_name_}"
+    const stubEndpointName  = "{_endpoint_name_}"
+    const files             = fs.readdirSync('./cli/stubs').map( file => { return file })
 
     files.map(async (file) => {
         const reading       = fs.readFileSync("./cli/stubs/" + file, "utf8");
@@ -30,8 +30,11 @@ const addFiles = (folderName: string ) => {
         const letters       = folderName.slice(1);
         const functionName  = firstLetter.toUpperCase() + letters;
         const content       = reading.replaceAll(stubFunctionName, functionName).replaceAll(stubEndpointName, folderName.toLocaleLowerCase());
-
-        return createAndWriteFile(folderName, file, content)
+        return createAndWriteFile({
+            foldername:folderName,
+            filename:file,
+            content:content
+        })
     });
 
     Tree.log({
@@ -53,10 +56,11 @@ const addFiles = (folderName: string ) => {
 }
 
 
-export const createAndWriteFile = (foldername: string, filename: string, content: string) =>
+export const createAndWriteFile = ({ foldername, filename, content }: CreateNewFile ) =>
 {
     try {
-        return fs.writeFileSync(`./${defaultDir}/${foldername}/${filename.replaceAll('.stub','')}.tsx`, content);
+        const folderName = `./${defaultDir}/${foldername}/${filename.replaceAll('.stub','')}.tsx`
+        return fs.writeFileSync(folderName, content);
     } catch (err) {
         console.error(err);
     }
