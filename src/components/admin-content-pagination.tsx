@@ -1,4 +1,4 @@
-import { Paginations } from '@/lib/types';
+import { Paginations } from '@/lib/client-types';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "./elements/pagination"
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 

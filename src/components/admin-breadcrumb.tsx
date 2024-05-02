@@ -1,5 +1,5 @@
 "use client"
-import { Breadcrumb } from "@/lib/types";
+import { Breadcrumb } from "@/lib/client-types";
 // import { useRouter } from "next/navigation";
 import AdminTitle from "./admin-title";
 import { classNames } from "@/lib/class-name";

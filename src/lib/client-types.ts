@@ -71,11 +71,8 @@ export type PaginationParams = {
 }
 
 
-// Expected
-// export type ModuleList = Array<{
-//     id: number | string
-//     name?: string
-//     href?: string
-//     current?: boolean
-//     children: ListChildren
-// }>;
+export type ClientSearchParams = {
+    searchParams?: PaginationParams & any
+    // request?: any & {
+    // }
+}

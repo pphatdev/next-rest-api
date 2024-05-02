@@ -3,21 +3,25 @@
 import AdminLayout from '../../../../components/admin-layout';
 import AdminBreadcrumb from '@/components/admin-breadcrumb';
 import { useEffect, useState } from 'react';
-import { Paginations } from '@/lib/types';
+import { ClientSearchParams, Paginations } from '@/lib/client-types';
 import { LeftContentHeader } from '@/components/admin-content-header';
-import { getUsers } from './data';
-import { ViewPagination } from './pagination';
-import { ViewContribute } from './view';
+import { getUsers } from './data-controller';
+import { ViewPagination } from '../../../../lib/pagination';
+import { ViewContribute } from './view-controller';
 import { useRouter } from 'next/navigation';
 import { useUpdateParamSearch } from '@/lib/goto-link';
+import { defaultSearchParams } from '../../../../lib/default';
 
 const pages = [
     { name: 'Projects', href: '/admin/projects', current: false},
     { name: 'Contributors', href: null, current: false },
 ]
 
-export default function Users(request: any)
+export default function Users(request: ClientSearchParams)
 {
+    const requestParams = request.searchParams
+    const searchParams  = { ...requestParams, ...defaultSearchParams}
+
     const router = useRouter();
     const [currentData, setCurrentData] = useState<Array<any>>([])
     const [currentPage, setCurrentPage] = useState(1)
@@ -27,7 +31,7 @@ export default function Users(request: any)
     const [pagination, setPagination] = useState<Paginations>({})
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [currentView, setCurrentView ] = useState('table')
-    const [currentSearchParams, setCurrentSearchParams] = useState(request.searchParams)
+    const [currentSearchParams, setCurrentSearchParams] = useState(searchParams)
 
     useEffect(() => {
         const contributorData = async () => {

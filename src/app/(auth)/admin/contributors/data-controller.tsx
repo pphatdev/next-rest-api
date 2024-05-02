@@ -1,15 +1,9 @@
-import { PaginationParams } from '@/lib/types';
+import { defaultSearchParams } from '@/lib/default';
+import { PaginationParams } from '@/lib/client-types';
 import axios from 'axios';
 
-const DefParams = {
-    page: 1,
-    limit: 10,
-    search: "",
-    sort: "asc",
-}
-
 export const getUsers = async (
-    params: PaginationParams = DefParams
+    params: PaginationParams = defaultSearchParams
 ) => {
     try {
         const response = await axios.get(`/api/v1/users`, {

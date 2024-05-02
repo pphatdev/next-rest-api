@@ -1,6 +1,6 @@
 import { ContentPagination } from "@/components/admin-content-pagination"
 import { PaginationLoading } from "@/components/elements/pagination-loading"
-import { Paginations } from "@/lib/types"
+import { Paginations } from "@/lib/client-types"
 
 export const ViewPagination: React.FC<{
     isLoading?: boolean,
