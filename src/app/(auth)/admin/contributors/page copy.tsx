@@ -2,7 +2,7 @@
 
 import AdminLayout from '../../../../components/admin-layout';
 import AdminBreadcrumb from '@/components/admin-breadcrumb';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ClientSearchParams, Paginations } from '@/lib/client-types';
 import { LeftContentHeader } from '@/components/admin-content-header';
 import { getUsers } from './data-controller';
@@ -33,40 +33,22 @@ export default function Users(request: ClientSearchParams)
     const [currentView, setCurrentView ] = useState('table')
     const [currentSearchParams, setCurrentSearchParams] = useState(searchParams)
 
-    const currentDataPromise = useMemo(async () => {
-        return await getUsers(currentSearchParams);
-    }, [
+    useEffect(() => {
+        const contributorData = async () => {
+            const data = await getUsers(currentSearchParams)
+            setCurrentData(data.result)
+            setPagination(data.pagination.buttons)
+        }
+        contributorData()
+        router.push(useUpdateParamSearch( currentSearchParams ))
+        setIsLoading(false)
+    },[
         currentPage,
         currentLimit,
         currentSearch,
         currentSort,
         currentSearchParams
-    ]);
-
-    currentDataPromise.then(currentData => {
-        setCurrentData(currentData.result)
-        setPagination(currentData.pagination.buttons)
-        router.push(useUpdateParamSearch( currentSearchParams ))
-        setIsLoading(false)
-    });
-
-
-    // useEffect(() => {
-    //     const contributorData = async () => {
-    //         const data = await getUsers(currentSearchParams)
-    //         setCurrentData(data.result)
-    //         setPagination(data.pagination.buttons)
-    //     }
-    //     contributorData()
-    //     router.push(useUpdateParamSearch( currentSearchParams ))
-    //     setIsLoading(false)
-    // },[
-    //     currentPage,
-    //     currentLimit,
-    //     currentSearch,
-    //     currentSort,
-    //     currentSearchParams
-    // ])
+    ])
 
     const searchData = (e: any) => {
         setCurrentSearch(e.target.value)
