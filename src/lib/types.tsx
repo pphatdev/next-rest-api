@@ -62,6 +62,15 @@ export type Paginations = {
     }
 }
 
+
+export type PaginationParams = {
+    page?: number,
+    limit?: number,
+    search?: string,
+    sort?: string | 'asc' | 'desc',
+}
+
+
 // Expected
 // export type ModuleList = Array<{
 //     id: number | string

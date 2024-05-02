@@ -6,13 +6,8 @@ export class Pagination
 
     query = async ( options: Options ) =>
     {
-        const { table, selectColumns, conditions, page, limit, search, sort, showTotal } = options
-
-        /**
-         * Declare No value param
-         */
         const noValue = ""
-
+        const { table, selectColumns, conditions, page, limit, search, sort, showTotal } = options
 
         /**
          * Select Columns from table {table}
@@ -26,7 +21,6 @@ export class Pagination
             column => column
         ).join(", ")
 
-
         /**
          * Search value from table {table}
          * @var {String} table
@@ -39,7 +33,6 @@ export class Pagination
             && search.value != ""
             && search.value != undefined
         )
-
 
         /**
          * Sorting Data
@@ -66,7 +59,6 @@ export class Pagination
         ).join(` ${search.operator} `)
 
 
-
         /**
          * Sorting Data from {table}
          * @param {String} sort.column
@@ -77,7 +69,6 @@ export class Pagination
         ).map(
             column => column
         ).join(", ")
-
 
 
         /**
@@ -92,7 +83,6 @@ export class Pagination
             && conditions.value != undefined
         )
 
-
         /**
          * Show Total
          * @param {String} conditions.value
@@ -100,10 +90,23 @@ export class Pagination
          */
         let total: any = undefined;
         if (showTotal) {
-            const reponse = await client.query(`SELECT count(id) from ${table}`)
-            total = reponse.rows[0].count || undefined
+            try {
+                const reponse = await client.query(
+                    `SELECT count(id) from ${table} ${
+                        issetSearch
+                        ? `WHERE ${
+                            issetcondition
+                            ? `${conditions.value} and`
+                            : ``} ${ searches } ilike '%${ search.value }%'`
+                        : noValue
+                    }`
+                )
+                total = reponse.rows[0].count || undefined
+            } catch (error) {
+                console.log(error);
+                total = undefined
+            }
         }
-
 
         /**
          * String Query Returning
@@ -128,12 +131,9 @@ export class Pagination
                 : noValue
             }`
 
-
-        return (
-            {
-                sql: query.replaceAll(/(\n+|\s+|\t+)/g, " "),
-                total: total,
-            }
-        )
+        return {
+            sql: query.replaceAll(/(\n+|\s+|\t+)/g, " "),
+            total: total,
+        }
     }
 }

@@ -43,11 +43,20 @@ export const useUpdateUrl: any = (
 };
 
 
+
+
 export const useUpdateParamSearch = (
+{
+    page,
+    limit,
+    search,
+    sort
+}: {
     page?: string | number,
     limit?: string | number,
     search?: string,
     sort?: string
+}
 ) => {
 
     let query: string = "page=1&limit=10&sort=asc&search=";
