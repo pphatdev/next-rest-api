@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -21,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/client-types.tx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/client-types.tx", "cli/stubs/cards.stub", "cli/stubs/data-controller.stub", "cli/stubs/table.stub", "cli/stubs/page.stub", "cli/stubs/view-controller.stub"],
   "exclude": ["node_modules"]
 }

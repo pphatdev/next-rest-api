@@ -1,0 +1,22 @@
+import { Table{_function_name_} } from "./table"
+import { Grid{_function_name_} } from "./cards"
+
+export const View{_function_name_}: React.FC<{
+    view?: string | 'table' | 'grid',
+    data: Array<any>,
+    isLoading: boolean,
+}> = ({
+    view,
+    data,
+    isLoading
+}) => {
+    return (
+        <div className='mt-9 rounded-lg ring-1 ring-black/10'>
+            {
+                view == "table"
+                ? <Table{_function_name_} isLoading={isLoading} data={data}/>
+                : <Grid{_function_name_} isLoading={isLoading} data={data}/>
+            }
+        </div>
+    )
+}

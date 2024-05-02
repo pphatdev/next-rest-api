@@ -3,10 +3,14 @@
     "version": "0.1.0",
     "private": true,
     "type": "module",
+    "bin": {
+        "make-module": "./cli/dist/index.js"
+    },
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "cli": "tsup --watch"
     },
     "dependencies": {
         "@headlessui/react": "^1.7.19",
@@ -26,8 +30,11 @@
         "axios": "^1.6.8",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
+        "console-log-tree": "^1.2.1",
         "date-fns": "^3.6.0",
+        "dts": "^0.1.1",
         "framer-motion": "^11.1.7",
+        "fs-extra": "^11.2.0",
         "input-otp": "^1.2.4",
         "lodash": "^4.17.21",
         "lodash.debounce": "^4.0.8",
@@ -42,9 +49,14 @@
         "react-query": "^3.39.3",
         "tailwind-merge": "^2.3.0",
         "tailwindcss-animate": "^1.0.7",
-        "tsparticles": "^3.3.0"
+        "tree-console": "^1.2.1",
+        "tsparticles": "^3.3.0",
+        "tsup": "^8.0.2",
+        "type-fest": "^4.18.1"
     },
     "devDependencies": {
+        "@types/console-log-tree": "^1.2.3",
+        "@types/fs-extra": "^11.0.4",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

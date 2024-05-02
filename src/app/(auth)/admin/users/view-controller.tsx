@@ -1,7 +1,7 @@
-import { TableContributor } from "./table"
-import { GridContributor } from "./cards"
+import { TableUsers } from "./table"
+import { GridUsers } from "./cards"
 
-export const ViewContribute: React.FC<{
+export const ViewUsers: React.FC<{
     view?: string | 'table' | 'grid',
     data: Array<any>,
     isLoading: boolean,
@@ -14,8 +14,8 @@ export const ViewContribute: React.FC<{
         <div className='mt-9 rounded-lg ring-1 ring-black/10'>
             {
                 view == "table"
-                ? <TableContributor isLoading={isLoading} data={data}/>
-                : <GridContributor isLoading={isLoading} data={data}/>
+                ? <TableUsers isLoading={isLoading} data={data}/>
+                : <GridUsers isLoading={isLoading} data={data}/>
             }
         </div>
     )
