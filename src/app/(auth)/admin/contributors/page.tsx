@@ -50,24 +50,6 @@ export default function Users(request: ClientSearchParams)
         setIsLoading(false)
     });
 
-
-    // useEffect(() => {
-    //     const contributorData = async () => {
-    //         const data = await getUsers(currentSearchParams)
-    //         setCurrentData(data.result)
-    //         setPagination(data.pagination.buttons)
-    //     }
-    //     contributorData()
-    //     router.push(useUpdateParamSearch( currentSearchParams ))
-    //     setIsLoading(false)
-    // },[
-    //     currentPage,
-    //     currentLimit,
-    //     currentSearch,
-    //     currentSort,
-    //     currentSearchParams
-    // ])
-
     const searchData = (e: any) => {
         setCurrentSearch(e.target.value)
         currentSearchParams.search = e.target.value
