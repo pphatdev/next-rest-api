@@ -4,6 +4,8 @@ import "../styles/globals.css";
 import { cn } from "@/lib/utils";
 // import { ThemeProvider } from "@/components/theme-provider"
 import { APP_NAME } from "@/configs/env";
+import NextTopLoader from 'nextjs-toploader';
+
 
 const fontSans = Inter({
     subsets: ["latin"],
@@ -30,6 +32,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
                         fontSans.className
                     )
                 }>
+                <NextTopLoader />
 
                 {/* <ThemeProvider
                     attribute="class"
