@@ -1,6 +1,7 @@
 import { Paginations } from '@/lib/client-types';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "./elements/pagination"
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './elements/select';
 
 const ContentPagination: React.FC<{
     pagination: Paginations,
@@ -26,6 +27,22 @@ const ContentPagination: React.FC<{
 
     return (
         <Pagination className="scale-90 sm:scale-100 mt-5 select-none">
+
+            {/* <div className='flex items-center gap-2 justify-center'>
+                <span> Rows per page</span>
+                <Select>
+                    <SelectTrigger className="w-auto pr-4">
+                        <SelectValue placeholder="10" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectItem value="10">10</SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div> */}
+
+
             <PaginationContent>
                 <PaginationItem>
                     <PaginationLink

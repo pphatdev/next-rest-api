@@ -2,7 +2,7 @@
 
 import AdminLayout from '../../../../components/admin-layout';
 import AdminBreadcrumb from '@/components/admin-breadcrumb';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ClientSearchParams, Paginations } from '@/lib/client-types';
 import { LeftContentHeader } from '@/components/admin-content-header';
 import { getUsers } from './data-controller';
@@ -20,7 +20,7 @@ const pages = [
 export default function Users(request: ClientSearchParams)
 {
     const requestParams = request.searchParams
-    const searchParams  = { ...requestParams, ...defaultSearchParams}
+    const searchParams  = { ...defaultSearchParams, ...requestParams}
 
     const router = useRouter();
     const [currentData, setCurrentData] = useState<Array<any>>([])
@@ -30,6 +30,7 @@ export default function Users(request: ClientSearchParams)
     const [currentSort, setCurrentSort] = useState('asc')
     const [pagination, setPagination] = useState<Paginations>({})
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [tableLoading, setTableLoading] = useState<boolean>(true)
     const [currentView, setCurrentView ] = useState('table')
     const [currentSearchParams, setCurrentSearchParams] = useState(searchParams)
 
@@ -44,10 +45,11 @@ export default function Users(request: ClientSearchParams)
     ]);
 
     currentDataPromise.then(currentData => {
-        setCurrentData(currentData.result)
-        setPagination(currentData.pagination.buttons)
+        setCurrentData(currentData?.result || [])
+        setPagination(currentData?.pagination?.buttons)
         router.push(useUpdateParamSearch( currentSearchParams ))
         setIsLoading(false)
+        setTableLoading(false)
     });
 
     const searchData = (e: any) => {
@@ -64,6 +66,7 @@ export default function Users(request: ClientSearchParams)
     }
 
     const setPage = (page: number) => {
+        setTableLoading(true)
         setCurrentPage(page)
         currentSearchParams.page = page
         setCurrentSearchParams(currentSearchParams)
@@ -84,7 +87,7 @@ export default function Users(request: ClientSearchParams)
             <ViewContribute
                 view={currentView}
                 data={currentData}
-                isLoading={isLoading}>
+                isLoading={tableLoading}>
             </ViewContribute>
 
             <ViewPagination

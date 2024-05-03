@@ -12,7 +12,7 @@ export const TableContributor: React.FC<{
                     <TableHead className="w-[150px]">ID</TableHead>
                     <TableHead className="text-start">Names</TableHead>
                     <TableHead className="text-start">Email</TableHead>
-                    <TableHead className="hidden sm:flex items-center justify-start">
+                    <TableHead colSpan={2}>
                         Join Date
                     </TableHead>
                 </TableRow>
@@ -30,7 +30,7 @@ export const TableContributor: React.FC<{
                             <TableCell>
                                 <div className="h-3 my-1 w-full rounded-full bg-slate-100 animate-pulse"></div>
                             </TableCell>
-                            <TableCell>
+                            <TableCell colSpan={2}>
                                 <div className="h-3 my-1 w-full rounded-full bg-slate-100 animate-pulse"></div>
                             </TableCell>
                         </TableRow>
@@ -46,10 +46,13 @@ export const TableContributor: React.FC<{
                                 <TableCell>
                                     <DateFormat dateString={user.created_at}></DateFormat>
                                 </TableCell>
+                                <TableCell>
+                                    <button>OPen</button>
+                                </TableCell>
                             </TableRow>
                         ))
                         : <TableRow>
-                            <TableCell colSpan={4} className="font-medium text-slate-500 text-center"> No Data </TableCell>
+                            <TableCell colSpan={5} className="font-medium text-slate-500 text-center"> No Data </TableCell>
                         </TableRow>
                 }
             </TableBody>

@@ -37,7 +37,13 @@ export type ListChildren = Array<{
 export type ModuleList = Array<
     Omit<ListChildren[0], "new" | "icon" | "initial">
     & { children: ListChildren }
->;
+>
+
+
+// export interface ModuleList extends Array<
+//     Omit<ListChildren[0], 'new' | 'icon'>
+//     & { children: ListChildren }
+// > {}
 
 export type Breadcrumb = Array<{
     name: string;

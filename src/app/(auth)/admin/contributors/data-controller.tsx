@@ -9,9 +9,10 @@ export const getUsers = async (
         const response = await axios.get(`/api/v1/users`, {
             params: params,
         });
+        // console.log(response);
         return response.data;
     } catch (error) {
-        console.error(error);
-        throw error;
+        // console.error(error);
+        // throw error;
     }
 };
