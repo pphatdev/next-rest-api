@@ -1,5 +1,6 @@
 import { TableContributor } from "./table"
 import { GridContributor } from "./cards"
+import { classNames } from "@/lib/class-name"
 
 export const ViewContribute: React.FC<{
     view?: string | 'table' | 'grid',
@@ -11,7 +12,7 @@ export const ViewContribute: React.FC<{
     isLoading
 }) => {
     return (
-        <div className='mt-9 rounded-lg ring-1 ring-black/10'>
+        <div className={classNames( view == 'table' ?'rounded-lg ring-1 ring-black/10': 'mt-9')}>
             {
                 view == "table"
                 ? <TableContributor isLoading={isLoading} data={data}/>

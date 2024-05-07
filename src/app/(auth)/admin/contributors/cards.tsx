@@ -1,6 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/elements/avatar"
 import { CardLoading } from "@/components/loading"
 
+
+const card = () => {
+    return (
+        <>ss</>
+    )
+}
+
+
 export const GridContributor: React.FC<{
     isLoading: boolean
     data: Array<any>

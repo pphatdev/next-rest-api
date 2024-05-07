@@ -31,7 +31,7 @@ export default function Users(request: ClientSearchParams)
     const [pagination, setPagination] = useState<Paginations>({})
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [tableLoading, setTableLoading] = useState<boolean>(true)
-    const [currentView, setCurrentView ] = useState('table')
+    const [currentView, setCurrentView ] = useState('grid')
     const [currentSearchParams, setCurrentSearchParams] = useState(searchParams)
 
     const currentDataPromise = useMemo(async () => {
