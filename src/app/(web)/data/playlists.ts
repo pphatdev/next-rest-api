@@ -1,16 +1,13 @@
-export type Playlist = (typeof playlists)[number]
+import { ModuleList } from "@/lib/client-types"
+import { UserGroupIcon } from "@heroicons/react/24/outline"
 
-export const playlists = [
-    "Recently Added",
-    "Recently Played",
-    "Top Songs",
-    "Top Albums",
-    "Top Artists",
-    "Logic Discography",
-    "Bedtime Beats",
-    "Feeling Happy",
-    "I miss Y2K Pop",
-    "Runtober",
-    "Mellow Days",
-    "Eminem Essentials",
+export const menu: ModuleList = [
+    {
+        id: 1,
+        name: 'Contributors',
+        href: '/',
+        children: [
+            { id: 1, name: 'Contributors', href: '/admin/contributors', initial: 'P', icon: UserGroupIcon, new: 0, current: false },
+        ]
+    },
 ]

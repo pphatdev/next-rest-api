@@ -1,203 +1,69 @@
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/elements/button"
 import { ScrollArea } from "@/components/elements/scroll-area"
 
-import { Playlist } from "../data/playlists"
+import { ListChildren } from "@/lib/client-types"
+import { classNames } from "@/lib/class-name"
+import { usePathname } from "next/navigation"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-    playlists: Playlist[]
+    playlists: ListChildren
 }
 
 export function Sidebar({ className, playlists }: SidebarProps) {
     return (
         <div className={cn("pb-12", className)}>
             <div className="space-y-4 py-4">
-                <div className="px-3 py-2">
-                    <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                        Discover
-                    </h2>
-                    <div className="space-y-1">
-                        <Button variant="secondary" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
+                <ScrollArea className="h-[calc(100vh_-9.1rem)] px-1">
+                    <ul className="space-y-1 py-2">
+                    {playlists.map((item) => (
+                        <li key={item.name}>
+                            {/* {pathname === item.href
+                                ? (item.current = true)
+                                : (item.current = false)
+                            } */}
+                            <a
+                                href={item.href}
+                                className={classNames(
+                                    item.current
+                                        ? "bg-gray-50 text-primary-600 dark:bg-primary/10"
+                                        : "text-gray-700 hover:text-primary-600 hover:bg-gray-50 dark:hover:bg-primary/10 dark:text-slate-300",
+                                    "group flex items-center relative gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                )}
                             >
-                                <circle cx="12" cy="12" r="10" />
-                                <polygon points="10 8 16 12 10 16 10 8" />
-                            </svg>
-                            Listen Now
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
-                            >
-                                <rect width="7" height="7" x="3" y="3" rx="1" />
-                                <rect width="7" height="7" x="14" y="3" rx="1" />
-                                <rect width="7" height="7" x="14" y="14" rx="1" />
-                                <rect width="7" height="7" x="3" y="14" rx="1" />
-                            </svg>
-                            Browse
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
-                            >
-                                <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9" />
-                                <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5" />
-                                <circle cx="12" cy="12" r="2" />
-                                <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
-                                <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
-                            </svg>
-                            Radio
-                        </Button>
-                    </div>
-                </div>
-                <div className="px-3 py-2">
-                    <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                        Library
-                    </h2>
-                    <div className="space-y-1">
-                        <Button variant="ghost" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
-                            >
-                                <path d="M21 15V6" />
-                                <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                                <path d="M12 12H3" />
-                                <path d="M16 6H3" />
-                                <path d="M12 18H3" />
-                            </svg>
-                            Playlists
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
-                            >
-                                <circle cx="8" cy="18" r="4" />
-                                <path d="M12 18V2l7 4" />
-                            </svg>
-                            Songs
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
-                            >
-                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                                <circle cx="12" cy="7" r="4" />
-                            </svg>
-                            Made for You
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
-                            >
-                                <path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12" />
-                                <circle cx="17" cy="7" r="5" />
-                            </svg>
-                            Artists
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-4 w-4"
-                            >
-                                <path d="m16 6 4 14" />
-                                <path d="M12 6v14" />
-                                <path d="M8 8v12" />
-                                <path d="M4 4v16" />
-                            </svg>
-                            Albums
-                        </Button>
-                    </div>
-                </div>
-                <div className="py-2">
-                    <h2 className="relative px-7 text-lg font-semibold tracking-tight">
-                        Playlists
-                    </h2>
-                    <ScrollArea className="h-[300px] px-1">
-                        <div className="space-y-1 p-2">
-                            {playlists?.map((playlist, i) => (
-                                <Button
-                                    key={`${playlist}-${i}`}
-                                    variant="ghost"
-                                    className="w-full justify-start font-normal"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="mr-2 h-4 w-4"
+                                {item?.icon ? (
+                                    <item.icon
+                                        className={classNames(
+                                            item.current
+                                                ? "text-primary-600"
+                                                : "text-gray-400 group-hover:text-primary-600 dark:text-primary",
+                                            "h-6 w-6 shrink-0"
+                                        )}
+                                        aria-hidden="true"
+                                    />
+                                ) : (
+                                    <span
+                                        className={classNames(
+                                            item.current
+                                                ? "text-primary-600 border-primary-600 bg-primary-50 dark:bg-primary/20"
+                                                : "text-gray-400 dark:bg-primary/10 border-gray-200 dark:border-primary/20 group-hover:border-primary-600 group-hover:text-primary-600",
+                                            "flex h-6 w-6 flex-shrink-0 text-xs items-center justify-center rounded-lg border text-[0.625rem] font-bold bg-white"
+                                        )}
                                     >
-                                        <path d="M21 15V6" />
-                                        <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                                        <path d="M12 12H3" />
-                                        <path d="M16 6H3" />
-                                        <path d="M12 18H3" />
-                                    </svg>
-                                    {playlist}
-                                </Button>
-                            ))}
-                        </div>
-                    </ScrollArea>
-                </div>
+                                        {String(item.name).charAt(0)}
+                                    </span>
+                                )}
+                                <span>{item.name}</span>
+
+                                {item?.new ? (
+                                    <span className={classNames( "px-1.5 drop-shadow-sm ml-auto flex items-center justify-center h-4 text-[0.6rem] rounded-md font-black text-red-600 dark:text-white bg-background" )}>
+                                        {item.new}
+                                    </span>
+                                ) : ('')}
+                            </a>
+                        </li>
+                    ))}
+                    </ul>
+                </ScrollArea>
             </div>
         </div>
     )
