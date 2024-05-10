@@ -5,7 +5,39 @@ const nextConfig = {
         taint: true,
     },
     images: {
-        domains: ['avatars.githubusercontent.com'],
+        // domains: ['avatars.githubusercontent.com', 'images.unsplash.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'static1.srcdn.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'avatars.githubusercontent.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'static.wikia.nocookie.net',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'm.media-amazon.com',
+                port: '',
+                pathname: '/**',
+            },
+        ],
     },
     async headers() {
         return [
