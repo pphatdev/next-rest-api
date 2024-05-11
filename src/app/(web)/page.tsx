@@ -3,10 +3,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/elements
 import WebLayout from './components/layout';
 import { HomeHero } from "./utils/hero";
 import { Card } from "./components/card";
+import { useState } from "react";
 
 
 export default function Home()
 {
+    const [loading, setLoading] = useState<boolean>(true);
+
     return (
         <WebLayout>
             <HomeHero></HomeHero>
@@ -19,7 +22,7 @@ export default function Home()
                     <TabsTrigger value="white-snake">White Snake</TabsTrigger>
                 </TabsList>
                 <TabsContent value="battle-through-the-heavens">
-                    <Card></Card>
+                    <Card data={[]} isLoading={loading}></Card>
                 </TabsContent>
             </Tabs>
         </WebLayout>
