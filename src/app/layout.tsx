@@ -39,14 +39,14 @@ export default function RootLayout(
 
                 <NextTopLoader speed={150} />
 
-                <ThemeProvider
+                {/* <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
                     disableTransitionOnChange
-                >
+                > */}
                     {children}
-                </ThemeProvider>
+                {/* </ThemeProvider> */}
             </body>
         </html>
     );
