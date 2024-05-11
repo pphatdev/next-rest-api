@@ -82,3 +82,18 @@ export type ClientSearchParams = {
     // request?: any & {
     // }
 }
+
+
+export type Videos = Array<{
+    id: number | string;
+    title: string;
+    description: string;
+    url: string;
+    thumbnail: string;
+    author: {
+        id: number | string;
+        channelId: string;
+        name: string;
+        avatar: string;
+    };
+}>

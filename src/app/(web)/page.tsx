@@ -2,13 +2,14 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/elements/tabs"
 import WebLayout from './components/layout';
 import { HomeHero } from "./utils/hero";
-import { Card } from "./components/card";
-import { useState } from "react";
-
+import { ViewCards } from "./components/card";
+import { useMemo, useState } from "react";
+import { videos } from './data/videos';
 
 export default function Home()
 {
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
+    const data = useMemo(() => videos, [videos]);
 
     return (
         <WebLayout>
@@ -22,7 +23,7 @@ export default function Home()
                     <TabsTrigger value="white-snake">White Snake</TabsTrigger>
                 </TabsList>
                 <TabsContent value="battle-through-the-heavens">
-                    <Card data={[]} isLoading={loading}></Card>
+                    <ViewCards data={data} isLoading={loading}></ViewCards>
                 </TabsContent>
             </Tabs>
         </WebLayout>

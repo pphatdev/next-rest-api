@@ -12,7 +12,7 @@ export const ViewContribute: React.FC<{
     isLoading
 }) => {
     return (
-        <div className={classNames( view == 'table' ?'rounded-lg ring-1 ring-black/10 mt-7': 'mt-9')}>
+        <div className={classNames( view == 'table' ?'rounded-lg ring-1 ring-black/10 mt-7  ': 'mt-9')}>
             {
                 view == "table"
                 ? <TableContributor isLoading={isLoading} data={data}/>
